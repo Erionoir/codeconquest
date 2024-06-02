@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const cards = [
-    { id: 1, name: 'For Loop', solution: 'for' },
+    { id: 1, name: 'For Loop', solution: 'for', description: 'Used to repeat a block of code a known number of times.', usage: 'for (let i = 0; i < array.length; i++) { /* code */ }' },
     { id: 2, name: 'If Statement', solution: 'if' },
     { id: 3, name: 'Function', solution: 'function' },
     { id: 4, name: 'While Loop', solution: 'while' },
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 12, name: 'Template Literal', solution: 'template' },
     // Add more cards as needed
   ];
-
+  
   const problems = [
     { id: 1, description: 'Iterate over an array', solution: 'for' },
     { id: 2, description: 'Check a condition', solution: 'if' },
@@ -31,6 +31,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add more problems as needed
   ];
 
+  const dictionaryButton = document.getElementById('dictionary-button');
+  const dictionaryCloseButton = document.getElementById('dictionary-close');
+  const dictionaryContainer = document.getElementById('code-dictionary-container');
+
+  dictionaryButton.addEventListener('click', () => {
+    dictionaryContainer.style.display = 'block';
+    dictionaryContainer.style.animation = 'fadeIn 0.3s forwards';
+  });
+  
+  dictionaryCloseButton.addEventListener('click', () => {
+    dictionaryContainer.style.animation = 'fadeOut 0.3s forwards';
+    setTimeout(() => {
+      dictionaryContainer.style.display = 'none';
+    }, 300);
+  });
+
+  function populateCodeDictionary() {
+    const dictionaryContainer = document.getElementById('code-dictionary');
+    cards.forEach(card => {
+      const cardElement = document.createElement('div');
+      cardElement.classList.add('dictionary-card');
+      cardElement.textContent = `${card.name}: ${card.solution}`;
+      cardElement.dataset.id = card.id;
+      cardElement.dataset.name = card.name;
+      cardElement.dataset.solution = card.solution;
+      cardElement.dataset.description = card.description;
+      cardElement.dataset.usage = card.usage;
+      dictionaryContainer.appendChild(cardElement);
+    });
+    problems.forEach(problem => {
+      const problemElement = document.createElement('div');
+      problemElement.classList.add('dictionary-card');
+      problemElement.textContent = `${problem.description}: ${problem.solution}`;
+      problemElement.dataset.id = problem.id;
+      problemElement.dataset.description = problem.description;
+      problemElement.dataset.solution = problem.solution;
+      dictionaryContainer.appendChild(problemElement);
+    });
+  }
+
+  populateCodeDictionary();
+
   const cardsContainer = document.getElementById('cards');
   const problemsContainer = document.getElementById('problems');
   const deckContainer = document.getElementById('deck');
@@ -38,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsButton = document.getElementById('settings-button');
   const settingsContainer = document.getElementById('settings-container');
   const settingsCloseButton = document.getElementById('settings-close');
-
+  
+  
   settingsButton.addEventListener('click', () => {
     settingsContainer.style.display = 'flex';
     settingsContainer.style.animation = 'fadeIn 0.3s forwards';

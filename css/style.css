@@ -8,6 +8,160 @@ body {
   background-color: #f0f0f0;
 }
 
+#code-dictionary-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#code-dictionary-container {
+  display: block;
+  opacity: 1;
+}
+
+.dictionary-title {
+  color: white;
+}
+
+#entry-title {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  border-top-left-radius: 10px; /* Adjust as needed */
+  border-top-right-radius: 10px; /* Adjust as needed */
+}
+
+#entry-content {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+#description-content {
+  background-color: white;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+  border-bottom-left-radius: 10px; /* Adjust as needed */
+  border-bottom-right-radius: 10px; /* Adjust as needed */
+}
+
+#dictionary-button {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#dictionary-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+#dictionary-close:hover {
+  background-color: #640a03;
+}
+
+#dictionary-button:hover {
+  background-color: #007B9A;
+  color: white;
+}
+
+#code-dictionary {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: flex-start;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  text-align: center;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.dictionary-entry {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+.dictionary-card {
+  width: 220px; /* Increase the width from 200px to 220px */
+  height: 100px;
+  background: #959595;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: black;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transform to the transition property */
+}
+
+.dictionary-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Add a hover effect to increase the shadow */
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+/* Custom scrollbar */
+#code-dictionary::-webkit-scrollbar {
+  width: 10px;
+}
+
+#code-dictionary::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+#code-dictionary::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dictionary-description {
+  flex-grow: 1;
+}
+
 #game-container {
   position: relative;
   display: flex;
@@ -300,7 +454,6 @@ body {
   background-color: #f44336;
   color: white;
   border: none;
-  border-radius: 50%;
   width: 30px;
   height: 30px;
   text-align: center;
@@ -308,6 +461,7 @@ body {
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 5px;
 }
 
 #settings-close:hover {
