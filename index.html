@@ -3,11 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeConquest</title>
+  <title>SyntaxShowdown</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="game-container">
+  <div id="title-screen">
+    <h1>SyntaxShowdown</h1>
+    <button id="play-button">Play</button>
+    <button id="settings-button">Settings</button>
+  </div>
+  <div id="settings-container" style="display: none;">
+    <h2>Settings</h2>
+    <div>
+      <label for="bgm-toggle">Enable BGM:</label>
+      <input type="checkbox" id="bgm-toggle">
+    </div>
+    <div>
+      <label for="bgm-volume">BGM Volume:</label>
+      <input type="range" id="bgm-volume" min="0" max="1" step="0.1">
+    </div>
+    <div>
+      <label for="sfx-volume">SFX Volume:</label>
+      <input type="range" id="sfx-volume" min="0" max="1" step="0.1">
+    </div>
+    <button id="settings-close">X</button>
+  </div>
+  <div id="game-container" style="display: none;">
     <div id="deck-area">
       <h2>Deck</h2>
       <div id="deck"></div>

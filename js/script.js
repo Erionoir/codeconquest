@@ -35,9 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const problemsContainer = document.getElementById('problems');
   const deckContainer = document.getElementById('deck');
   const resetButton = document.getElementById('reset-button');
+  const settingsButton = document.getElementById('settings-button');
+  const settingsContainer = document.getElementById('settings-container');
+  const settingsCloseButton = document.getElementById('settings-close');
+
+  settingsButton.addEventListener('click', () => {
+    settingsContainer.style.display = 'flex';
+    settingsContainer.style.animation = 'fadeIn 0.3s forwards';
+  });
+
+  settingsCloseButton.addEventListener('click', () => {
+    settingsContainer.style.animation = 'fadeOut 0.3s forwards';
+    setTimeout(() => {
+      settingsContainer.style.display = 'none';
+    }, 300);
+  });
+
+  settingsCloseButton.addEventListener('click', () => {
+    settingsContainer.style.display = 'none';
+  });
   let resetCount = 3;
   let deck = [...cards];
   let hand = [];
+
+  document.getElementById('play-button').addEventListener('click', () => {
+    document.getElementById('title-screen').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+  });
 
   function getRandomCards(num) {
     const shuffled = deck.sort(() => 0.5 - Math.random());
