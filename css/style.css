@@ -9,6 +9,7 @@ body {
 }
 
 #game-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +28,11 @@ body {
 }
 
 #deck-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 #problems {
@@ -65,6 +70,15 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .problem:nth-child(2) {
   animation-delay: 1s;
 }
@@ -86,6 +100,11 @@ body {
   color: black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
+  transition: background-color 0.3s
+}
+
+#deck:hover {
+  background-color: #d0d0d0;
 }
 
 #cards {
@@ -123,6 +142,43 @@ body {
 .card.solved {
   opacity: 0;
   transition: opacity 0.5s;
+}
+
+.deck-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: 140px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.deck-modal div {
+  width: 100px;
+  height: 140px;
+  background: #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.deck-modal div:hover {
+  opacity: 0.7;
 }
 
 @keyframes shuffle {
