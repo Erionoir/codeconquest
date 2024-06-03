@@ -80,8 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsButton = document.getElementById('settings-button');
   const settingsContainer = document.getElementById('settings-container');
   const settingsCloseButton = document.getElementById('settings-close');
-  
-  
+
   settingsButton.addEventListener('click', () => {
     settingsContainer.style.display = 'flex';
     settingsContainer.style.animation = 'fadeIn 0.3s forwards';
@@ -94,9 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   });
 
-  settingsCloseButton.addEventListener('click', () => {
-    settingsContainer.style.display = 'none';
-  });
   let resetCount = 3;
   let deck = [...cards];
   let hand = [];
@@ -109,6 +105,29 @@ document.addEventListener('DOMContentLoaded', () => {
   function getRandomCards(num) {
     const shuffled = deck.sort(() => 0.5 - Math.random());
     return shuffled.splice(0, num);
+  }
+
+  function updateGraveyard() {
+    const graveyardContainer = document.getElementById('graveyard');
+    graveyardContainer.textContent = `Graveyard (${removedCards.length})`;
+    let graveyardModal;
+  
+    graveyardContainer.addEventListener('mouseenter', () => {
+      graveyardModal = document.createElement('div');
+      graveyardModal.classList.add('graveyard-modal');
+      removedCards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.textContent = card.name;
+        graveyardModal.appendChild(cardElement);
+      });
+      document.body.appendChild(graveyardModal);
+    });
+  
+    graveyardContainer.addEventListener('mouseleave', () => {
+      if (graveyardModal) {
+        graveyardModal.remove();
+      }
+    });
   }
 
   function renderCards() {
@@ -143,29 +162,29 @@ document.addEventListener('DOMContentLoaded', () => {
       problemElement.addEventListener('click', handleProblemClick);
       problemsContainer.appendChild(problemElement);
     });
-}
+  }
 
-function updateDeck() {
-  deckContainer.textContent = `Deck (${deck.length})`;
-  let deckModal;
+  function updateDeck() {
+    deckContainer.textContent = `Deck (${deck.length})`;
+    let deckModal;
 
-  deckContainer.addEventListener('mouseenter', () => {
-    deckModal = document.createElement('div');
-    deckModal.classList.add('deck-modal');
-    deck.forEach(card => {
-      const cardElement = document.createElement('div');
-      cardElement.textContent = card.name;
-      deckModal.appendChild(cardElement);
+    deckContainer.addEventListener('mouseenter', () => {
+      deckModal = document.createElement('div');
+      deckModal.classList.add('deck-modal');
+      deck.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.textContent = card.name;
+        deckModal.appendChild(cardElement);
+      });
+      document.body.appendChild(deckModal);
     });
-    document.body.appendChild(deckModal);
-  });
 
-  deckContainer.addEventListener('mouseleave', () => {
-    if (deckModal) {
-      deckModal.remove();
-    }
-  });
-}
+    deckContainer.addEventListener('mouseleave', () => {
+      if (deckModal) {
+        deckModal.remove();
+      }
+    });
+  }
 
   let selectedCard = null;
 
@@ -181,22 +200,22 @@ function updateDeck() {
     }
   }
 
-let spawnedProblems = [];
+  let spawnedProblems = [];
 
-function renderProblem() {
-  const cardSolutions = deck.map(card => card.solution);
-  const problemWithSolution = problems.find(problem => cardSolutions.includes(problem.solution) && !spawnedProblems.includes(problem.id));
-  
-  if (problemWithSolution) {
-    spawnedProblems.push(problemWithSolution.id);
-    const problemElement = document.createElement('div');
-    problemElement.classList.add('problem');
-    problemElement.dataset.solution = problemWithSolution.solution;
-    problemElement.textContent = problemWithSolution.description;
-    problemElement.addEventListener('click', handleProblemClick);
-    problemsContainer.appendChild(problemElement);
+  function renderProblem() {
+    const cardSolutions = deck.map(card => card.solution);
+    const problemWithSolution = problems.find(problem => cardSolutions.includes(problem.solution) && !spawnedProblems.includes(problem.id));
+    
+    if (problemWithSolution) {
+      spawnedProblems.push(problemWithSolution.id);
+      const problemElement = document.createElement('div');
+      problemElement.classList.add('problem');
+      problemElement.dataset.solution = problemWithSolution.solution;
+      problemElement.textContent = problemWithSolution.description;
+      problemElement.addEventListener('click', handleProblemClick);
+      problemsContainer.appendChild(problemElement);
+    }
   }
-}
 
   function handleProblemClick(event) {
     const problemElement = event.target;
@@ -213,6 +232,11 @@ function renderProblem() {
           setTimeout(() => card.remove(), 500);
         }
       });
+      // Handle card usage and update the graveyard
+      const card = hand.find(handCard => handCard.solution === selectedCard);
+      if (card) {
+        handleCardUsage(card);
+      }
       selectedCard = null;
       setTimeout(() => drawCard(), 500);
     } else {
@@ -224,11 +248,14 @@ function renderProblem() {
     }
   }
 
+  let removedCards = [];
+
   function handleReset() {
     if (resetCount > 0) {
       resetCount--;
       shuffleAnimation();
       setTimeout(() => {
+        deck = cards.filter(card => !removedCards.includes(card));
         renderCards();
         resetButton.textContent = `Reset Hand (${resetCount})`;
       }, 1000);
@@ -242,6 +269,22 @@ function renderProblem() {
       card.style.animation = 'shuffle 1s';
       setTimeout(() => card.style.animation = '', 1000);
     });
+  }
+
+  function handleCardUsage(card) {
+    // Find the index of the card in the hand
+    const cardIndex = hand.findIndex(handCard => handCard.id === card.id);
+
+    // If the card is in the hand, remove it
+    if (cardIndex !== -1) {
+      hand.splice(cardIndex, 1);
+    }
+
+    // Add the card to the removedCards array
+    removedCards.push(card);
+
+    // Update the graveyard
+    updateGraveyard();
   }
 
   function drawCard() {
