@@ -47,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   });
 
+  document.getElementById('play-button').addEventListener('click', function() {
+    document.getElementById('game-container').classList.add('fade-in');
+  });
+
   function populateCodeDictionary() {
     const dictionaryContainer = document.getElementById('code-dictionary');
     cards.forEach(card => {

@@ -5,7 +5,15 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f0f0f0;
+  background-image: url('bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#title-screen h1 img {
+  width: 600px;
+  height: auto;
 }
 
 #code-dictionary-container {
@@ -144,7 +152,6 @@ body {
   opacity: 0.7;
 }
 
-/* Custom scrollbar */
 #code-dictionary::-webkit-scrollbar {
   width: 10px;
 }
@@ -169,10 +176,18 @@ body {
   align-items: center;
   width: 80%;
   max-width: 1000px;
-  background: white;
+  background-image: url('forest.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+}
+
+#game-container.fade-in {
+  animation: fadeIn 0.5s;
+  animation-fill-mode: forwards;
 }
 
 #play-area, #deck-area, #hand {
