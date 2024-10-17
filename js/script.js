@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let resetCount = 3;
   let deck = [...cards];
   let hand = [];
+  let lives = 3; // P9a11
 
   document.getElementById('play-button').addEventListener('click', () => {
     document.getElementById('title-screen').style.display = 'none';
@@ -245,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => drawCard(), 500);
     } else {
       alert('Incorrect solution! Try again.');
+      decreaseLives(); // Pbc67
     }
     problemsContainer.removeChild(event.target);
     if (problemsContainer.children.length < 5) {
@@ -308,12 +310,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function updateLivesIndicator() { // P4c81
+    const livesCountElement = document.getElementById('lives-count');
+    livesCountElement.textContent = lives;
+  }
+
+  function decreaseLives() { // Pbc67
+    lives--;
+    updateLivesIndicator();
+    if (lives === 0) {
+      endGame();
+    }
+  }
+
+  function endGame() { // Pdc01
+    alert('Game Over! You have no more lives left.');
+    // Add any additional logic to end the game, such as resetting the game or showing a game over screen
+  }
+
   resetButton.addEventListener('click', handleReset);
 
   function setupGame() {
     renderCards();
     renderProblems();
     updateDeck();
+    updateLivesIndicator(); // P4c81
   }
 
   setupGame();
