@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
   const cards = [
     { id: 1, name: 'For Loop', solution: 'for', description: 'Used to repeat a block of code a known number of times.', usage: 'for (let i = 0; i < array.length; i++) { /* code */ }' },
-    { id: 2, name: 'If Statement', solution: 'if', description: 'Used to execute a block of code if a specified condition is true.', usage: 'if (condition) { /* code */ }' },
-    { id: 3, name: 'Function', solution: 'function', description: 'Used to define a reusable block of code.', usage: 'function functionName(parameters) { /* code */ }' },
-    { id: 4, name: 'While Loop', solution: 'while', description: 'Used to repeat a block of code as long as a specified condition is true.', usage: 'while (condition) { /* code */ }' },
-    { id: 5, name: 'Array Method', solution: 'array', description: 'Used to perform operations on arrays.', usage: 'array.method()' },
-    { id: 6, name: 'Object Method', solution: 'object', description: 'Used to perform operations on objects.', usage: 'object.method()' },
-    { id: 7, name: 'Switch Statement', solution: 'switch', description: 'Used to perform different actions based on different conditions.', usage: 'switch(expression) { case x: /* code */ break; case y: /* code */ break; default: /* code */ }' },
+    { id: 2, name: 'If Statement', solution: 'if', description: 'Used to check a condition and execute code based on the result.', usage: 'if (condition) { /* code */ }' },
+    { id: 3, name: 'Function', solution: 'function', description: 'Used to define a reusable block of code.', usage: 'function name(parameters) { /* code */ }' },
+    { id: 4, name: 'While Loop', solution: 'while', description: 'Used to repeat a block of code while a condition is true.', usage: 'while (condition) { /* code */ }' },
+    { id: 5, name: 'Array Method', solution: 'array', description: 'Used to manipulate arrays.', usage: 'array.method()' },
+    { id: 6, name: 'Object Method', solution: 'object', description: 'Used to manipulate objects.', usage: 'object.method()' },
+    { id: 7, name: 'Switch Statement', solution: 'switch', description: 'Used to perform different actions based on different conditions.', usage: 'switch(expression) { case x: /* code */ break; }' },
     { id: 8, name: 'Class', solution: 'class', description: 'Used to create a blueprint for objects.', usage: 'class ClassName { constructor() { /* code */ } }' },
     { id: 9, name: 'Promise', solution: 'promise', description: 'Used to handle asynchronous operations.', usage: 'new Promise((resolve, reject) => { /* code */ })' },
-    { id: 10, name: 'Async/Await', solution: 'async', description: 'Used to write asynchronous code in a synchronous manner.', usage: 'async function functionName() { await /* code */ }' },
-    { id: 11, name: 'Arrow Function', solution: 'arrow', description: 'Used to define a function with a shorter syntax.', usage: 'const functionName = (parameters) => { /* code */ }' },
-    { id: 12, name: 'Template Literal', solution: 'template', description: 'Used to embed expressions within string literals.', usage: 'const string = `Text with ${expression}`;' },
+    { id: 10, name: 'Async/Await', solution: 'async', description: 'Used to write asynchronous code in a synchronous manner.', usage: 'async function name() { await promise; }' },
+    { id: 11, name: 'Arrow Function', solution: 'arrow', description: 'Used to write shorter function syntax.', usage: 'const name = (parameters) => { /* code */ }' },
+    { id: 12, name: 'Template Literal', solution: 'template', description: 'Used to embed expressions in strings.', usage: 'const text = `string ${expression}`;' },
     // Add more cards as needed
   ];
   
@@ -317,4 +317,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setupGame();
+
+  // Add event listener to .dictionary-card elements to display title and description when clicked
+  document.querySelectorAll('.dictionary-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const entryTitle = document.getElementById('entry-title');
+      const entryContent = document.getElementById('entry-content');
+      const descriptionContent = document.getElementById('description-content');
+
+      entryTitle.textContent = card.dataset.name;
+      entryContent.textContent = card.dataset.solution;
+      descriptionContent.textContent = card.dataset.description;
+
+      document.querySelectorAll('.dictionary-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
 });

@@ -152,6 +152,11 @@ body {
   opacity: 0.7;
 }
 
+.dictionary-card.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
 #code-dictionary::-webkit-scrollbar {
   width: 10px;
 }
