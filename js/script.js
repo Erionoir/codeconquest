@@ -333,4 +333,19 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.add('active');
     });
   });
+
+  // Add event listener to window resize event to adjust layout dynamically
+  window.addEventListener('resize', () => {
+    renderCards();
+    renderProblems();
+  });
+
+  // Add touch event handling for mobile interactions
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('touchstart', handleCardClick);
+  });
+
+  document.querySelectorAll('.problem').forEach(problem => {
+    problem.addEventListener('touchstart', handleProblemClick);
+  });
 });

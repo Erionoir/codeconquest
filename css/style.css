@@ -12,7 +12,8 @@ body {
 }
 
 #title-screen h1 img {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: auto;
 }
 
@@ -553,4 +554,46 @@ body {
 }
 .graveyard-modal div:hover {
   opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    height: auto;
+  }
+
+  #title-screen h1 img {
+    width: 80%;
+  }
+
+  #game-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #deck-area, #graveyard-area, #hand {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  #problems {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .problem {
+    width: 80px;
+    height: 80px;
+    margin: 10px 0;
+  }
+
+  .card {
+    width: 80px;
+    height: 120px;
+  }
+
+  .deck-modal div, .graveyard-modal div {
+    width: 80px;
+    height: 120px;
+  }
 }
