@@ -101,10 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let deck = [...cards];
   let hand = [];
   let lives = 3; // P9a11
+  let timer = 30; // Pba45
+  let timerInterval; // Pba45
 
   document.getElementById('play-button').addEventListener('click', () => {
     document.getElementById('title-screen').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
+    startTimer(); // P6dfa
   });
 
   function getRandomCards(num) {
@@ -326,6 +329,25 @@ document.addEventListener('DOMContentLoaded', () => {
   function endGame() { // Pdc01
     alert('Game Over! You have no more lives left.');
     // Add any additional logic to end the game, such as resetting the game or showing a game over screen
+    document.getElementById('title-screen').style.display = 'block';
+    document.getElementById('game-container').style.display = 'none';
+    clearInterval(timerInterval);
+  }
+
+  function updateTimer() { // P38f4
+    const timerCountElement = document.getElementById('timer-count');
+    timerCountElement.textContent = timer;
+  }
+
+  function startTimer() { // Pb05d
+    timerInterval = setInterval(() => {
+      timer--;
+      updateTimer();
+      if (timer === 0) {
+        decreaseLives();
+        timer = 30;
+      }
+    }, 1000);
   }
 
   resetButton.addEventListener('click', handleReset);
@@ -335,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProblems();
     updateDeck();
     updateLivesIndicator(); // P4c81
+    updateTimer(); // P38f4
   }
 
   setupGame();

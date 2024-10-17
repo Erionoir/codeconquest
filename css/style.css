@@ -572,6 +572,22 @@ body {
   color: red;
 }
 
+#timer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#timer-count {
+  font-size: 18px;
+  font-weight: bold;
+  color: blue;
+}
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;
